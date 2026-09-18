@@ -1,30 +1,50 @@
-# Pacesetter para Piscina
+# Dev_Trabajo_conjunto
 
-Dispositivo diseñado para funcionar como **pacesetter**, también conocido como **liebre de natación**, y acompañar a los nadadores durante sus entrenamientos y competencias.
+Esta rama está destinada al **desarrollo colaborativo del software** del proyecto Pacesetter para Piscina.
 
-Su función principal es establecer y regular el ritmo de las pasadas en la piscina, proporcionando una referencia constante de velocidad para que los nadadores puedan mantener un esfuerzo controlado y potenciar su desempeño deportivo.
+Aquí se incorporarán, probarán y documentarán todos los archivos relacionados con la programación del sistema: firmware del ESP32, control de las tiras LED WS2811, lectura de botones, regulación de velocidad, rutinas de barrido y pruebas de funcionamiento.
 
-## Objetivo
+## Propósito de la rama
 
-El proyecto busca ofrecer una herramienta de apoyo para la preparación de nadadores, permitiendo trabajar con mayor precisión sobre el ritmo de carrera y mejorar la consistencia de cada pasada.
+La rama `Dev_Trabajo_conjunto` funcionará como espacio de trabajo para desarrollar el código de manera ordenada y permitir la colaboración entre los integrantes del proyecto.
 
-Al contar con una referencia de velocidad estable, los deportistas pueden:
+En esta rama se podrán:
 
-- Mantener un ritmo uniforme durante el entrenamiento.
-- Desarrollar una mejor percepción del tiempo y la velocidad.
-- Ajustar su esfuerzo de acuerdo con los objetivos de cada sesión.
-- Prepararse de manera más precisa para situaciones de competencia.
+- Crear y modificar el firmware del ESP32.
+- Implementar la secuencia de barrido de las tiras LED.
+- Configurar el control de velocidad mediante botones.
+- Realizar pruebas antes de incorporar cambios definitivos al proyecto.
+- Documentar decisiones técnicas, conexiones y procedimientos de software.
+- Revisar y mejorar el código de forma conjunta.
 
-## Funcionamiento
+## Contenido esperado
 
-El pacesetter acompaña el recorrido del nadador y actúa como una guía visual de velocidad. De esta manera, permite regular el ritmo de las pasadas y facilita que el deportista mantenga la intensidad planificada durante el entrenamiento.
+La organización prevista para el software es:
 
-Esta referencia resulta especialmente útil para realizar trabajos de velocidad, resistencia y ritmo de competencia.
+```text
+firmware/       Código del ESP32
+tests/          Pruebas y validaciones
+docs/software/  Documentación específica del software
+Instrucciones/  Documentación técnica del sistema
+```
 
-## Aplicación
+La estructura podrá ampliarse a medida que avance el desarrollo.
 
-El dispositivo está pensado para ser utilizado en entrenamientos de natación orientados a la mejora del rendimiento. Su implementación permite complementar la planificación del entrenador y brindar al nadador una referencia clara y constante dentro de la piscina.
+## Hardware objetivo
 
----
+El software de esta rama estará preparado inicialmente para trabajar con:
 
-_Herramienta de apoyo para el entrenamiento y el desarrollo del rendimiento en natación._
+- NodeMCU ESP32 de 38 pines.
+- Dos tiras LED WS2811 RGB de 12 V.
+- Dos líneas de datos independientes para las tiras.
+- Tres botones: aumentar velocidad, reducir velocidad e iniciar o pausar.
+
+## Flujo de trabajo
+
+Los cambios de software deberán probarse primero en esta rama. Una vez verificados, podrán integrarse a `main` cuando se considere que están listos para formar parte de una versión estable.
+
+La rama `main` conservará la información general y descriptiva del producto. Esta rama concentrará el desarrollo colaborativo, el código y la documentación relacionada con el funcionamiento interno del sistema.
+
+## Estado actual
+
+La rama se encuentra preparada para comenzar el desarrollo del firmware y las primeras pruebas con el ESP32 y las tiras WS2811.
