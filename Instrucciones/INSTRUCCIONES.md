@@ -14,7 +14,9 @@ La velocidad del barrido se modificará mediante botones.
 - El WS2811 controla grupos de 3 LED, por lo que hay aproximadamente 20 píxeles controlables por metro.
 - Una tira de 25 m tendrá aproximadamente 500 píxeles controlables.
 - Una ventana luminosa de 1 m equivaldrá aproximadamente a 20 píxeles.
-- Ambas tiras ejecutarán el barrido de forma sincronizada.
+- La tira derecha realizará el recorrido de ida.
+- La tira izquierda realizará el recorrido de vuelta.
+- El sistema alternará entre ambas tiras al llegar a los extremos de la piscina.
 
 ## 3. Componentes
 
@@ -138,15 +140,28 @@ El interruptor general no se conecta a un GPIO. Su función será cortar la alim
 La rutina inicial deberá:
 
 1. Iniciar ambas tiras apagadas.
-2. Encender una ventana de aproximadamente 20 píxeles.
-3. Desplazar esa ventana desde el inicio hasta el final de las tiras.
-4. Apagar la posición anterior antes de avanzar.
-5. Repetir el recorrido de forma continua.
-6. Mantener las dos tiras sincronizadas.
-7. Aumentar el ritmo con `Velocidad +`.
-8. Reducir el ritmo con `Velocidad -`.
-9. Detener o reanudar el barrido con `Inicio/Pausa`.
-10. Aplicar antirrebote a todos los botones.
+2. Encender una ventana de aproximadamente 20 píxeles al comienzo de la tira derecha.
+3. Desplazar la ventana por la tira derecha desde el inicio hasta el final de la piscina.
+4. Al llegar al extremo, apagar la tira derecha.
+5. Encender la ventana en el extremo final de la tira izquierda.
+6. Desplazar la ventana por la tira izquierda desde el final hasta el inicio de la piscina.
+7. Al llegar al punto de partida, apagar la tira izquierda y comenzar nuevamente por la derecha.
+8. Repetir el recorrido de forma continua, alternando ida y vuelta.
+9. Aumentar el ritmo con `Velocidad +`.
+10. Reducir el ritmo con `Velocidad -`.
+11. Detener o reanudar el barrido con `Inicio/Pausa`.
+12. Aplicar antirrebote a todos los botones.
+
+La tira derecha y la tira izquierda no mostrarán el barrido al mismo tiempo. La derecha representa el desplazamiento de ida y la izquierda representa el desplazamiento de vuelta.
+
+En la programación, la tira derecha avanzará desde el píxel `0` hasta el último píxel. La tira izquierda deberá recorrer sus píxeles en sentido inverso, desde el último píxel hasta el píxel `0`, independientemente de la orientación física de sus conectores.
+
+La transferencia entre tiras será inmediata: cuando la ventana luminosa llegue al final de la tira derecha, se apagará allí y aparecerá en el extremo final de la tira izquierda para comenzar el regreso. No se utilizará una estela gradual ni se mantendrán ambas tiras encendidas durante el cambio.
+
+```text
+IDA:     tira derecha  [0 -----------------> 499]
+VUELTA:  tira izquierda [499 -----------------> 0]
+```
 
 Si las tiras se recortan a 25 m, el programa utilizará `500` píxeles por tira. Si se mantienen los 30 m completos, utilizará `600` píxeles y limitará el barrido a la zona seleccionada.
 
